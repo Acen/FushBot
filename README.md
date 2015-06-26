@@ -14,3 +14,10 @@ This script has four requirements.
 
 ### Requirements Download:
 https://hostr.co/2yYWHMv4pgoW
+
+### Thanks:
+
+* TechnoJacker - http://forum.cheatengine.org/viewtopic.php?p=5556189#5556189
+  * Great functions in his Borderlands Pre-Sequel table. Made things buttloads easier.
+* Steve Donovan - http://stevedonovan.github.io/winapi/api.html
+  * The amazing Lua WINAPI library <33333

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CheatTable CheatEngineTableVersion="18">
   <Forms>
-    <DebugWindow Class="TCEForm" Encoding="Ascii85">UD44[!yps{.6t(cP2D=q;6P(nw)6ou(6e1;Yud67Ww1}dU(ALcOVpR{sf4n(b9Zn8_91{jB7kB!za;R;KUaF2-m!AuthlVz]$f+y27f@Gz/9GUI6:5jyWllk?!D,g4?zfB+GxZFO13GGjP49qGCIw.%mioB3/.@/[X+@Mx4aZAf!H;%q;[oGyX{@p9{N5fIvxf-oC?AZ5;jF7gFfE;Zy)@yjtg2YT;k-p8}:%I70y-TS:6)io/(FYt7l@;eBLDIlC=L[MswM.C}[Ha8V-:y[{ShVCBsZGs^PBZdn34Z1pYpb7UbhF-SI1%NEXs@*f/@quG9?[%cEmI68-:</DebugWindow>
+    <DebugWindow Class="TCEForm" Encoding="Ascii85">eUs5^n:llH4V0LKM7yXa@_F[^s]ds]V5=RsRjPuTPTGwF9)cGumF,0(TkJ]yO4GE++dD3I4v/vU=)pIG^QvhK[!A)MU!A_ldHU%b/X!xct}b=,i4wL*3.In5KhfwjWmT/%4[:VNz5hL2u}OH.Z!b/jmQ-F8AXJQSO71lSG1^LoO+x{N[Y-1w=k0pOaF7?md^r__?lu%gMT4g*2tf.NPqVCs=S.sRY7!!Gr1YF]$%Dc-OtCemV-y,pS42:gw$kn6,qo!ekQpnfF?0v^X$c%pZ9[)tGEOa@-{5}o%XiZAg;%j-fkVPgy}i6g4(k2A3%DpJ;t!2_k5HTMCB1]S0hN;WI?w1j;,NKJb,QrRZXR_hDh@3wI!B}w2Vl{%xA*O)!30%jnU,jc$^V#3D7vPkTnhd$o?9jq:O#IYCrZsX8WPa.zBz:)#$K_}8bp_KN}Bx.P3O@n+IEqzA=MNmI*q]^PmN@1yIIkeY*Ga(:y+d4_Jj0nV$)pcFX1KY!Js_pLDk@JMm4Qz)IoK0E$/Ra;JV;x#AAzyc5Cpz@oSFC/,QyM8OEB3isCo?99I_wgZ)t_=mKpj)P5l[yEt^P*%CyrBMc%)W?pa</DebugWindow>
   </Forms>
   <CheatEntries/>
   <UserdefinedSymbols/>
   <LuaScript>-- Version 010 --
+
+-- Load WinAPI library
+local winapi = require('winapi')
+scriptConnected = false
 
 --[[
 Utility Functions
@@ -13,13 +17,18 @@ Utility Functions
 
 -- Debug Logger
 debug_log_visible = false
-function DebugLog(sLog)
+function DebugLog(sLog, sLevel)
   if not sLog or not trim(sLog) then return end
   if not debug_log_visible then
     form_show(DebugWindow)
     debug_log_visible = true
   end
-  memo_append(DebugWindow_Log, trim(sLog))
+  if not sLevel or sLevel == 0 then
+    memo_append(DebugWindow_Log, trim(sLog))
+  end
+  if sLevel == DebugLevel then
+    memo_append(DebugWindow_Log, trim(sLog))
+  end
 end
 Log = DebugLog
 
@@ -30,13 +39,135 @@ function DebugMessage(sMessage)
 end
 
 function clearDebugLog()
-  stings_clear(memo_getLines(DebugWindow_Log))
+  strings_clear(memo_getLines(DebugWindow_Log))
 end
 
 function trim(s)
   return s:find'^%s*$' and '' or s:match'^%s*(.*%S)'
 end
 
+-- Process handling
+function getProcessNameFromProcessID(iProcessID)
+  if iProcessID &lt; 1 then return 0 end
+  local plist = createStringlist()
+  getProcesslist(plist)
+  for i=1, strings_getCount(plist)-1 do
+    local process = strings_getString(plist, i)
+    local offset = string.find(process,'-')
+    local pid = tonumber('0x'..string.sub(process,1,offset-1))
+    local pname = string.sub(process,offset+1)
+    if pid == iProcessID then return pname end
+  end
+  return 0
+end
 
+function getOpenedProcessName()
+  local process = getOpenedProcessID()
+  if process ~= 0 and getProcessIDFromProcessName(DefaultProccessName) == getOpenedProcessID() then
+    if checkOpenedProcess(DefaultProccessName) == true then return DefaultProccessName end
+    return 0
+  end
+  return getProcessNameFromProcessID(getOpenedProcessID())
+end
+
+function checkOpenedProcess(process)
+  if process == nil or process == 0 or process == false then
+    process = getOpenedProcessID()
+    if process ~= 0 and getProcessIDFromProcessName(DefaultProccessName) == process then
+      process = DefaultProccessName
+    end
+  end
+  if type(process) == "number" then process = getProcessNameFromProcessID(process) end
+  if process ~= nil and process ~= 0 then
+    if readInteger(process) then return true end
+  end
+  return false
+end
+-- DebugLevel
+if checkbox_getState(DebugWindow_DebugMode) == 0 then
+  DebugLevel = 0
+  DebugLog('!DebugMode Disabled')
+end
+if checkbox_getState(DebugWindow_DebugMode) == 1 then
+  DebugLevel = 1
+  DebugLog('!DebugMode Enabled')
+end
+
+clearDebugLog()
+control_setCaption(DebugWindow, "FushBot by Cellux - Cheat Engine "..getCEVersion())
+DebugLog('* - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - *')
+DebugLog('* Trove Fishing Bot by Cellux')
+DebugLog('* Version 010')
+DebugLog('* GitHub: https://github.com/Acen/FushBot')
+DebugLog('* - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - *')
+
+-- Clear Auto-Attach List
+errorOnLookupFailure(false)
+strings_clear(getAutoAttachList())
+
+--[[
+Testing saving to registry
+--]]
+-- Disable Auto-attach when already attached to process
+-- local settingRegistry = winapi.open_reg_key([[HKEY_CURRENT_USER\Software\Cheat Engine]], true)
+-- if settingRegistry:get_value('Always AutoAttach') == 0 then
+--   DebugLog('!Disabling Always AutoAttach', 1)
+--   settingRegistry:set_value('Always AutoAttach', 0, REG_DWORD) -- This doesn't actually save as REG_DWORD - don't ask me why.
+--   settingRegistry:close()
+--   reloadSettingsFromRegistry()
+-- end
+
+function configureWindow()
+  if (fbSession == nil) or (fbSession == 0) then
+    fbSessionShared = allocateSharedMemory('fbSessionSharedInt', 1024)
+    troveWindow = winapi.find_window_match('Trove') -- Finds original Trove window
+    troveProcess = troveWindow:get_process()
+    openProcess(troveProcess:get_pid()) -- Connects CheatEngine to window via Process ID
+    if (fbSessionShared == nil) or (fbSessionShared &lt; 1) or (readInteger(fbSessionShared) &lt; 1) then
+      writeInteger(fbSessionShared, 1)
+      local troveWindowTitle = 'FushBot 1'
+      troveWindow:set_text(troveWindowTitle)
+      troveWindow = winapi.find_window_match(troveWindowTitle)
+      fbSession = 1; DebugLog('!FushBot session ID: 1', 1)
+    elseif (fbSessionShared &gt; 1) or (readInteger(fbSessionShared) &gt; 1) then
+      writeInteger(fbSessionShared, readInteger(fbSessionShared)+1)
+      local troveWindowTitle = 'FushBot ' ..readInteger(fbSessionShared)
+      troveWindow:set_text(troveWindowTitle)
+      troveWindow = winapi.find_window_match(troveWindowName)
+      fbSession = readInteger(fbSessionShared); DebugLog('!FushBot session ID = ' ..readInteger(fbSessionShared), 1)
+    else
+      DebugLog('## Failed to create FushBot session, please try again.')
+    end
+  elseif (fbSession &gt; 0) then
+    troveWindow = winapi.find_window_match('FushBot ' ..fbSession)
+    DebugLog('Existing Fushbot session found (dafek happened?) -- Session: '..fbSession, 1)
+  else
+    DebugLog('Something dun goof\'d')
+  end
+end
+
+local OpenedProcess = getOpenedProcessName()
+if OpenedProcess ~= 0 then
+  DebugLog("~Hooked Process: "..OpenedProcess..' ('..getOpenedProcessID()..')')
+end
+
+-- Debug Mode defaults
+function DebugModeChange(sender)
+  if checkbox_getState(DebugWindow_DebugMode) == 0 then
+    DebugLevel = 0
+    DebugLog('!DebugMode Disabled')
+  end
+  if checkbox_getState(DebugWindow_DebugMode) == 1 then
+    DebugLevel = 1
+    DebugLog('!DebugMode Enabled')
+  end
+end
+
+function ConnectClick(sender)
+  if (scriptConnected == false) then
+     configureWindow()
+     scriptConnected = true
+  end
+end
 </LuaScript>
 </CheatTable>
