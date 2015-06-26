@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="18">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"Test WinAPI is available (RUN ME IF THIS IS THE FIRST TIME USING THIS EVAR)"</Description>
+      <LastState Activated="0"/>
+      <Color>80000008</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+{$lua}
+  if(scriptExecuted == 0) or (scriptExecuted == nil) then
+    messageDialog("You have not yet executed the script.\nTo execute the script go to 'Table' -&gt; 'Show Cheat Table Lua Script' -&gt; Click 'Execute Script' Button", 0, 2)
+  end
+  debugWinAPI()
+{$asm}
+[DISABLE]
+{$lua}
+{$asm}
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys/>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"Run FushBot"</Description>
+      <LastState Activated="0"/>
+      <Color>80000008</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+{$lua}
+  if(scriptExecuted == 0) or (scriptExecuted == nil) then
+    messageDialog("You have not yet executed the script.\nTo execute the script go to 'Table' -&gt; 'Show Cheat Table Lua Script' -&gt; Click 'Execute Script' Button", 0, 2)
+  end
+  runScript()
+{$asm}
+[DISABLE]
+{$lua}
+  endScript()
+{$asm}
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys/>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>37</ID>
+      <Description>"Enable Low-Graphics mode"</Description>
+      <LastState Activated="0"/>
+      <Color>80000008</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+{$lua}
+  if(scriptExecuted == 0) or (scriptExecuted == nil) then
+    messageDialog("You have not yet executed the script.\nTo execute the script go to 'Table' -&gt; 'Show Cheat Table Lua Script' -&gt; Click 'Execute Script' Button", 0, 2)
+  end
+  setVideo()
+{$asm}
+[DISABLE]
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>20</ID>
+      <Description>"Variables"</Description>
+      <LastState Value="" Activated="0" RealAddress="00000000"/>
+      <Color>80000008</Color>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>16</ID>
+          <Description>"varLuresAvailable"</Description>
+          <LastState Value="2171" Activated="0" RealAddress="0E1F1F78"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"trove.exe"+0090D828</Address>
+          <Offsets>
+            <Offset>58</Offset>
+            <Offset>90</Offset>
+            <Offset>78</Offset>
+            <Offset>9C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>15</ID>
+          <Description>"varLineCastWater"</Description>
+          <LastState Value="0" Activated="0" RealAddress="07D0D450"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"trove.exe"+00909C84</Address>
+          <Offsets>
+            <Offset>F2D0</Offset>
+            <Offset>A818</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>41</ID>
+          <Description>"varLineCastLava"</Description>
+          <LastState Value="0" Activated="0" RealAddress="07D0D200"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"trove.exe"+00909C84</Address>
+          <Offsets>
+            <Offset>F080</Offset>
+            <Offset>A818</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>39</ID>
+          <Description>"varLineCastChocolate"</Description>
+          <LastState Value="0" Activated="0" RealAddress="07D0D6A0"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"trove.exe"+00909C84</Address>
+          <Offsets>
+            <Offset>F520</Offset>
+            <Offset>A818</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17</ID>
+          <Description>"varBobbingWater"</Description>
+          <LastState Value="0" Activated="0" RealAddress="07D0DEC0"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"trove.exe"+00909C84</Address>
+          <Offsets>
+            <Offset>FD40</Offset>
+            <Offset>A818</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>38</ID>
+          <Description>"varBobbingChocolate"</Description>
+          <LastState Value="0" Activated="0" RealAddress="07D0E110"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"trove.exe"+00909C84</Address>
+          <Offsets>
+            <Offset>FF90</Offset>
+            <Offset>A818</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>43</ID>
+          <Description>"varBobbingLava"</Description>
+          <LastState Value="0" Activated="0" RealAddress="07D0E364"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"trove.exe"+00909C84</Address>
+          <Offsets>
+            <Offset>101E4</Offset>
+            <Offset>A818</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>36</ID>
+      <Description>"Video Settings"</Description>
+      <LastState Value="" Activated="0" RealAddress="00000000"/>
+      <Color>80000008</Color>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>33</ID>
+          <Description>"Shader Detail (0 - 0.50 - 1)"</Description>
+          <LastState Value="0" Activated="0" RealAddress="00EC218C"/>
+          <Color>80000008</Color>
+          <VariableType>Float</VariableType>
+          <Address>"trove.exe"+0090D878</Address>
+          <Offsets>
+            <Offset>1C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>34</ID>
+          <Description>"Super Sampling (0.25 - 1 - 4)"</Description>
+          <LastState Value="1" Activated="0" RealAddress="00EC2190"/>
+          <Color>80000008</Color>
+          <VariableType>Float</VariableType>
+          <Address>"trove.exe"+0090D878</Address>
+          <Offsets>
+            <Offset>20</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>35</ID>
+          <Description>"Draw Distance ( 1 - 256)"</Description>
+          <LastState Value="256" Activated="0" RealAddress="00EC2198"/>
+          <Color>80000008</Color>
+          <VariableType>Float</VariableType>
+          <Address>"trove.exe"+0090D878</Address>
+          <Offsets>
+            <Offset>28</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name/>
+      <Address>32D0064</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+  <LuaScript>function debugWinAPI()
+  returntest = winapi.show_message("Working!", "It looks like you're good to go!\nWinAPI is loading correctly. &lt;3", 'ok', 'information')
+  print('debugWinAPI: ' .. returntest)
+end
+
+function setVideo()
+  varVideoShaderDetail = '[trove.exe+90D878]+1c'
+  varVideoSuperSampling = '[trove.exe+90D878]+20'
+  varVideoDrawDistance = '[trove.exe+90D878]+28'
+  writeFloat(varVideoShaderDetail, 0)
+  writeFloat(varVideoSuperSampling, 0.25)
+  writeFloat(varVideoDrawDistance, 20)
+  print('Low graphics mode enabled.')
+  print('Shader detail: 0, Super Sampling: 0.25, Draw Distance: 20')
+end
+
+function runScript()
+  if(fushBotSession == nil) or (fushBotSession == 0) then
+    fushBotSession = windowSelect(0)
+  elseif(fushBotSession &gt; 0) then
+    fushBotSession = windowSelect(fushBotSession)
+  end
+  varScriptStatus = scriptInfo()
+  if(varScriptStatus == 1) then
+    timerCreate()
+    timer_setEnabled(varFishTimer, true)
+    varFishingStatus = 0
+    fushCaught = 0
+    print('Script Started')
+  else
+    print('Issue compiling addresses. Please try again.')
+  end
+end
+
+function windowSelect(fushBotSessionInt)
+  if(fushBotSessionInt == 0) then
+    windowSharedInteger = allocateSharedMemory("windowInteger", 4096)
+    sleep(100)
+    troveWindow = winapi.find_window_match('Trove')
+    if (windowSharedInteger &lt; 1) or (readInteger(windowSharedInteger) &lt; 1) then
+      writeInteger(windowSharedInteger, 1)
+      local troveWindowName = 'FushBot' .. readInteger(windowSharedInteger)
+      troveWindow:set_text(troveWindowName)
+      troveWindow = winapi.find_window_match(troveWindowName)
+      print('fushBotSession:\t', readInteger(windowSharedInteger))
+      return(readInteger(windowSharedInteger))
+    elseif (windowSharedInteger &gt; 0) then
+      writeInteger(windowSharedInteger, (readInteger(windowSharedInteger)+1))
+      local troveWindowName = 'FushBot' .. readInteger(windowSharedInteger)
+      troveWindow:set_text(troveWindowName)
+      troveWindow = winapi.find_window_match(troveWindowName)
+      return(readInteger(windowSharedInteger))
+    else
+      print("Failed to find Trove client to connect new Fushbot session. Please try again.")
+    end --]]
+  elseif(fushBotSessionInt &gt; 0) then
+    print('Existing Fushbot session found -- connecting ' .. fushBotSessionInt)
+    troveWindow = winapi.find_window_match('FushBot' .. fushBotSessionInt)
+    return fushBotSessionInt
+  else
+    print('No session found. Please try again.')
+  end
+end
+
+function scriptInfo()
+  print("Script started:\t", os.date("%X"))
+    print("\tAddresses --")
+    print("\tvarLuresAvailable:\t\t", string.format('%X', getAddress(varLuresAvailable)), "\t", readInteger(varLuresAvailable))
+    print("\tvarLineCastWater:\t\t", string.format('%X', getAddress(varLineCastWater)))
+    print("\tvarLineCastLava:\t\t", string.format('%X', getAddress(varLineCastLava)))
+    print("\tvarLineCastChocolate:\t", string.format('%X', getAddress(varLineCastChocolate)))
+    print("\tvarBobbingWater:\t\t", string.format('%X', getAddress(varBobbingWater)))
+    print("\tvarBobbingLava:\t\t", string.format('%X', getAddress(varBobbingLava)))
+    print("\tvarBobbingChocolate:\t", string.format('%X', getAddress(varBobbingChocolate)))
+  return 1 -- varScriptStatus = 1
+end
+
+function timerCreate() -- Timer Settings for stepper()
+  varFishTimer = createTimer(nil, false)
+  timer_onTimer(varFishTimer, stepper)
+  timer_setInterval(varFishTimer, 2000)
+  print('Timer Created')
+  timerCount = 0
+end
+
+function stepper()
+  timerCount = timerCount + 2
+  if (varFishingStatus == 0) and (isCast() == 0) then
+    castLine()
+  elseif (varFishingStatus == 1) and (isCast() == 0) then
+    sleep(1000)
+    if(isCast() == 0) then
+      castLine()
+    end
+  elseif (isBobbing() &gt; 0) then
+    catchFush()
+  end
+end
+
+function castLine()
+  varFishingStatus = 1
+  if (readInteger(varLuresAvailable) &gt; 0) then
+     if (isCast() == 0) then
+       troveWindow:send_message(7, 0, 0)
+       sleep(100)
+       troveWindow:send_message(256, 70, 2162689)
+       sleep(1)
+       troveWindow:send_message(257, 70, 2162689)
+       sleep(3000)
+     end
+  else
+    print("No lures available, or in assigned inventory slot (bottom left).")
+  end
+end
+
+function catchFush()
+  if (isCast() &gt; 0) then
+    troveWindow:send_message(7,0,0)
+    sleep(100)
+    troveWindow:send_message(256, 70, 2162689)
+    sleep(1)
+    troveWindow:send_message(257, 70, 2162689)
+    sleep(3000)
+    varFishingStatus = 0
+    fushCaught = fushCaught + 1
+  else
+    print("Line not cast? What in the world..?")
+  end
+end
+
+function isBobbing()
+  if (readInteger(varBobbingWater) == 1) or (readInteger(varBobbingLava) == 1) or (readInteger(varBobbingChocolate) == 1) then
+    return 1
+  else
+    return 0
+  end
+end
+
+function isCast()
+  if (readInteger(varLineCastWater) == 1) or (readInteger(varLineCastLava) == 1) or (readInteger(varLineCastChocolate) == 1) then
+    return 1
+  else
+    return 0
+  end
+end
+
+function endScript()
+  timer_setEnabled(varFishTimer, false)
+  if(debugMode == 1) then
+    print("Script ended:\t", os.date("%X"))
+  end
+  print("Fush caught:\t", fushCaught)
+  print("Seconds running:\t", timerCount)
+  varFishTimer.Destroy()
+  print("Timer destroyed")
+  varFishTimer = nil
+end
+
+do -- EXECUTE SCRIPT --
+  if(cheatEngineIs64Bit()) then
+    messageDialog("This requires to be running the 32-bit version of CheatEngine. Please restart.\nFile is found in root CheatEngine folder, named 'cheatengine-i386.exe'", 0, 2)
+  end
+  local winapi = require('winapi')
+  scriptExecuted = 1
+  -- Resets because of breaking, timers man...
+  if(varFishTimer ~= nil) then
+    timer_setEnabled(varFishTimer, false)
+    varFishTimer.Destroy()
+    varFishTimer = nil
+  end
+-- Variable assignment
+  varScriptStatus = 0
+  varLuresAvailable = '[[[[trove.exe+90D828]+9c]+78]+90]+58'
+  varLineCastWater = '[[trove.exe+909C84]+a818]+f2d0'
+  varLineCastLava = '[[trove.exe+909C84]+a818]+f080'
+  varLineCastChocolate = '[[trove.exe+909C84]+a818]+f520'
+  varBobbingWater = '[[trove.exe+909C84]+a818]+fd40'
+  varBobbingLava = '[[trove.exe+909C84]+a818]+101e4'
+  varBobbingChocolate = '[[trove.exe+909C84]+a818]+ff90'
+  print('Script has been successfully executed. You can now Run FushBot.')
+end -- // EXECUTE SCRIPT --
+
+</LuaScript>
+</CheatTable>
