@@ -212,7 +212,8 @@
       <Address>32D0064</Address>
     </SymbolEntry>
   </UserdefinedSymbols>
-  <LuaScript>function debugWinAPI()
+  <LuaScript>-- Version 009 ---
+function debugWinAPI()
   returntest = winapi.show_message("Working!", "It looks like you're good to go!\nWinAPI is loading correctly. &lt;3", 'ok', 'information')
   print('debugWinAPI: ' .. returntest)
 end
