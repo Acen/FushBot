@@ -3,7 +3,22 @@
   <Forms>
     <DebugWindow Class="TCEForm" Encoding="Ascii85">eUs5^n:llH4V0LKM7yXa@_F[^s]ds]V5=RsRjPuTPTGwF9)cGumF,0(TkJ]yO4GE++dD3I4v/vU=)pIG^QvhK[!A)MU!A_ldHU%b/X!xct}b=,i4wL*3.In5KhfwjWmT/%4[:VNz5hL2u}OH.Z!b/jmQ-F8AXJQSO71lSG1^LoO+x{N[Y-1w=k0pOaF7?md^r__?lu%gMT4g*2tf.NPqVCs=S.sRY7!!Gr1YF]$%Dc-OtCemV-y,pS42:gw$kn6,qo!ekQpnfF?0v^X$c%pZ9[)tGEOa@-{5}o%XiZAg;%j-fkVPgy}i6g4(k2A3%DpJ;t!2_k5HTMCB1]S0hN;WI?w1j;,NKJb,QrRZXR_hDh@3wI!B}w2Vl{%xA*O)!30%jnU,jc$^V#3D7vPkTnhd$o?9jq:O#IYCrZsX8WPa.zBz:)#$K_}8bp_KN}Bx.P3O@n+IEqzA=MNmI*q]^PmN@1yIIkeY*Ga(:y+d4_Jj0nV$)pcFX1KY!Js_pLDk@JMm4Qz)IoK0E$/Ra;JV;x#AAzyc5Cpz@oSFC/,QyM8OEB3isCo?99I_wgZ)t_=mKpj)P5l[yEt^P*%CyrBMc%)W?pa</DebugWindow>
   </Forms>
-  <CheatEntries/>
+  <CheatEntries>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"1a"</Description>
+      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+      <Color>80000008</Color>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"trove.exe"+00868BC0</Address>
+      <Offsets>
+        <Offset>58</Offset>
+        <Offset>0</Offset>
+        <Offset>78</Offset>
+        <Offset>17C</Offset>
+      </Offsets>
+    </CheatEntry>
+  </CheatEntries>
   <UserdefinedSymbols/>
   <LuaScript>-- Version 010 --
 
@@ -83,6 +98,7 @@ function checkOpenedProcess(process)
   end
   return false
 end
+
 -- DebugLevel
 if checkbox_getState(DebugWindow_DebugMode) == 0 then
   DebugLevel = 0
@@ -103,7 +119,14 @@ DebugLog('* - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * 
 
 -- Clear Auto-Attach List
 errorOnLookupFailure(false)
-strings_clear(getAutoAttachList())
+local ceSettings = winapi.open_reg_key([[HKEY_CURRENT_USER\Software\Cheat Engine]], true)
+if(ceSettings:get_value('AutoAttach') ~= '') or (ceSettings:getValue('AutoAttach') ~= nil) then
+  ceSettings:set_value('AutoAttach', '')
+  ceSettings:close()
+  reloadSettingsFromRegistry()
+  DebugLog('AutoAttach list cleared.', 1)
+end
+
 
 --[[
 Testing saving to registry
@@ -122,6 +145,10 @@ function configureWindow()
     fbSessionShared = allocateSharedMemory('fbSessionSharedInt', 1024)
     troveWindow = winapi.find_window_match('Trove') -- Finds original Trove window
     troveProcess = troveWindow:get_process()
+    if (getProcessNameFromProcessID(troveProcess:get_pid()) ~= 'Trove.exe') then
+      DebugLog('Trove.exe not found correctly. Check no other window titles have the name Trove in it.')
+      return
+    end
     openProcess(troveProcess:get_pid()) -- Connects CheatEngine to window via Process ID
     if (fbSessionShared == nil) or (fbSessionShared &lt; 1) or (readInteger(fbSessionShared) &lt; 1) then
       writeInteger(fbSessionShared, 1)
@@ -140,7 +167,7 @@ function configureWindow()
     end
   elseif (fbSession &gt; 0) then
     troveWindow = winapi.find_window_match('FushBot ' ..fbSession)
-    DebugLog('Existing Fushbot session found (dafek happened?) -- Session: '..fbSession, 1)
+    DebugLog('Existing Fushbot session found -- Session: '..fbSession, 1)
   else
     DebugLog('Something dun goof\'d')
   end
